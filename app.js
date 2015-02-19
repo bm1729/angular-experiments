@@ -5,21 +5,21 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./src/routes/index');
+var routes = require('./src/server/index');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'src/public/views'));
+app.set('views', path.join(__dirname, 'src/client/views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+// uncomment after placing your favicon in src/client
+//app.use(favicon(__dirname + 'src/client/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'src/public')));
+app.use(express.static(path.join(__dirname, 'src/client')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 
 app.use('/', routes);
