@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         src: ['app.js', 'src/**/*.js']
       },
       test: {
-        src: ['test/**/*.test.js']
+        src: ['test-unit/**/*.test.js']
       },
     },
     simplemocha: {
@@ -27,7 +27,15 @@ module.exports = function(grunt) {
         reporter: 'tap'
       },
   
-      all: { src: ['test/**/*.test.js'] }
+      all: { src: ['test-unit/server/**/*.test.js'] }
+    },
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js',
+        options: {
+          background: true
+        }
+      }
     },
     watch: {
       gruntfile: {
@@ -45,6 +53,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-simple-mocha');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-karma');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'simplemocha']);
