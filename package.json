@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "test": "grunt"
+    "test": "grunt;grunt karma"
   },
   "dependencies": {
     "angular": "^1.3.13",
