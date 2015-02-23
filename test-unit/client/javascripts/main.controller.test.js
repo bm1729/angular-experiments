@@ -33,6 +33,6 @@ describe('mainController', function() {
         
         // assert
         httpBackend.flush();
-        expect(scope.message).to.equal('Goodbye cruel world');
+        expect(scope.message).to.equal('Goodbye cruel world!');
     });
 });
