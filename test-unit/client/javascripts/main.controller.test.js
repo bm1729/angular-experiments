@@ -1,20 +1,21 @@
-/* globals describe, it, beforeEach, inject chai */
+/* globals describe, it, beforeEach, inject, module, chai */
 
 var expect = chai.expect;
 
 describe('mainController', function() {
     
     var scope;
-    var controller;
+    var http;
     
     beforeEach(module('app'));
     
-    beforeEach(inject(function($rootScope, $controller) {
+    beforeEach(inject(function($rootScope, $controller, _$http_) {
         scope = $rootScope.$new();
-        controller = $controller('mainController', {$scope: scope});
+        http = _$http_;
+        $controller('mainController', {$scope: scope, $http: http});
     }));
   
     it('message', function() {
-        expect(controller.message).to.equal('Hello world');
+        expect(scope.message).to.equal('Hello world');
     });
 });
