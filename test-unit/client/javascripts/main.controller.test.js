@@ -1,21 +1,38 @@
-/* globals describe, it, beforeEach, inject, module, chai */
+/* globals describe, it, beforeEach, afterEach, inject, module, chai */
 
 var expect = chai.expect;
 
 describe('mainController', function() {
     
     var scope;
-    var http;
+    var httpBackend;
     
     beforeEach(module('app'));
     
-    beforeEach(inject(function($rootScope, $controller, _$http_) {
+    beforeEach(inject(function($rootScope, $controller, $http, $httpBackend) {
         scope = $rootScope.$new();
-        http = _$http_;
-        $controller('mainController', {$scope: scope, $http: http});
+        httpBackend = $httpBackend;
+        $controller('mainController', {$scope: scope, $http: $http});
     }));
+
+    afterEach(function () {
+        httpBackend.verifyNoOutstandingExpectation();
+        httpBackend.verifyNoOutstandingRequest();
+    });  
   
     it('message', function() {
         expect(scope.message).to.equal('Hello world');
+    });
+    
+    it('getMessage', function() {
+        // arrange
+        httpBackend.when('GET', 'message').respond({ message: 'Goodbye cruel world' });
+        
+        // act
+        scope.getMessage();
+        
+        // assert
+        httpBackend.flush();
+        expect(scope.message).to.equal('Goodbye cruel world');
     });
 });
