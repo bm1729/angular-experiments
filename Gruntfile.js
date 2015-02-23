@@ -26,8 +26,12 @@ module.exports = function(grunt) {
         ui: 'bdd',
         reporter: 'tap'
       },
-  
-      all: { src: ['test-unit/server/**/*.test.js'] }
+      unit: {
+        src: ['test-unit/server/**/*.test.js']
+      },
+      integration: {
+        src: ['test-integration/server/**/*.test.js']
+      }
     },
     karma: {
       unit: {
@@ -56,6 +60,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'simplemocha']);
+  grunt.registerTask('default', ['jshint', 'simplemocha:unit', 'simplemocha:integration']);
 
 };
